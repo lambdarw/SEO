@@ -23,8 +23,8 @@ def masking(df, idx, num_sens=1):
     return maksed_embd, mask
 
 # 使用KBERT提取关键词
-kw_model = KeyBERT(model='/data/zhangruwen/premodel/all-roberta-large-v1')
-st_model = SentenceTransformer('/data/zhangruwen/premodel/all-roberta-large-v1').cuda()
+kw_model = KeyBERT(model='all-roberta-large-v1')
+st_model = SentenceTransformer('all-roberta-large-v1').cuda()
 
 def extract_keywords_kbert(doc):
     kw_res = set()
