@@ -2,7 +2,8 @@ from tqdm import tqdm
 import json
 
 '''
-重新处理一遍json文件
+因为在前2步的时候可能date日期的格式发生变动，所以重新处理一下json文件。
+Since the format of the date date may have changed during the previous two steps, rework the json file.
 '''
 def reprocess_json():
     with open("./dataset/" + DATASET_NAME + "_step2_summary_kw.json", "r") as file:
@@ -20,6 +21,6 @@ def reprocess_json():
 
 
 if __name__ == "__main__":
-    DATASET_NAME = 'WCEP18'  # News14  WCEP18  WCEP19
+    DATASET_NAME = 'News14'  # News14  WCEP19
 
     reprocess_json()
