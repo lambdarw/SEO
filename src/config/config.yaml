@@ -1,0 +1,8 @@
+openai:
+  api_key: # your api
+  base_url: # the url
+  temperature: 0.2
+  max_tokens: 2048
+llama:
+  temperature: 0.2
+  max_tokens: 2048
