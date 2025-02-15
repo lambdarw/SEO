@@ -1,5 +1,7 @@
 # Event Evaluation Dataset
 
+**_The whole data will be released upon publication._**
+
 ## Data Collection
 We used GPT-4o-mini to generate the multiple-choice QA datasets for News14 and WCEP19 to assess the quality of the synopsis.  
 - For the article details evaluation, we generated one question for each news article.  
