@@ -1,19 +1,20 @@
 ## The Intelligent Social Event Observer: Multi-Source Continuous Event Integration, Discovery, and Synopsis Generation with LLMs
 
 
-## Overview
-SEO is a novel framework to integrate evolving events, detect emerging events, and automatically generate event synopsis for social networks in real time. It supports refining the event detection range by adjusting the size of the time window.
+## ✒️ Overview
+SEO is a novel framework to integrate evolving events, detect emerging events, and automatically generate event synopsis for social networks in real time.
+
+## 👇 Dataset
+We evaluate our method for event detection on the [News14]() and [WCEP19]() datasets. The process files are in the path ./data/processed.
+
+We evaluate our method for synopsis generation on the News14-detail, WCEP19-detail, News14-integrity, and WCEP19-integrity datasets. The datasets are in the path ./data/evaluation.
 
 
-### Dataset
-We evaluate our method on the [News14]() and [WCEP19]() dataset.
+## ⏰ Quick Start
 
+**Step1: Write a configuration file in YAML format**
 
-## Quick Start
-
-**Step1: Write a configuration file in yaml format**
-
-Users can easily configure the parameters of LLMs in a yaml file. 
+Users can easily configure the parameters of LLMs in a YAML file. 
 The path of the configuration file is SEO/config/config.yaml
 
 ```yaml
@@ -35,7 +36,7 @@ python main.py
 ```
 
 
-## Citation
+## 📝 Citation
 Please cite our repository if you use SEO in your work.
 ```bibtex
 ```
