@@ -28,12 +28,10 @@ st_model = SentenceTransformer('all-roberta-large-v1').cuda()
 
 def extract_keywords_kbert(doc):
     kw_res = set()
-    # 为了使结果多样化，使用最大边界相关算法(MMR)  
     # To diversify the results, the maximum boundary Correlation algorithm (MMR) was used.
     keywords = kw_model.extract_keywords(doc, keyphrase_ngram_range=(1, 3), stop_words='english',
                                         use_mmr=True, diversity=0.7, top_n=10)
 
-    # 过滤掉形容词、动词和停用词
     # Filter out adjectives, verbs, and stops
     for word in keywords:
         word = remove_digits_and_spaces(word[0])  # Remove numbers and consecutive Spaces
