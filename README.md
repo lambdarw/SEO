@@ -10,7 +10,7 @@ We evaluate our method for event detection on the [News14]() and [WCEP19]() data
 We evaluate our method for synopsis generation on the News14-detail, WCEP19-detail, News14-integrity, and WCEP19-integrity datasets. The datasets are in the path ./data/evaluation.
 
 
-## ⏰ Quick Start
+## ✨ Quick Start
 
 **Step1: Write a configuration file in YAML format**
 
@@ -35,6 +35,14 @@ prompts:
 python main.py
 ```
 
+## ⏰ Optimized Inference with vLLM
+To maximize inference efficiency, we recommend leveraging the [vLLM](https://docs.vllm.ai/en/latest/) framework for batched and cached inference. 
+
+Installation Instructions, requiring CUDA 11.8+:
+```yaml
+pip install torch==2.3.0+cu118 -f https://download.pytorch.org/whl/torch_stable.html
+pip install xformers==0.0.26.post1 vllm==0.5.1+cu118
+```
 
 ## 📝 Citation
 Please cite our repository if you use SEO in your work.
