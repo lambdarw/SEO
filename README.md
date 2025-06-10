@@ -44,7 +44,7 @@ pip install torch==2.3.0+cu118 -f https://download.pytorch.org/whl/torch_stable.
 pip install xformers==0.0.26.post1 vllm==0.5.1+cu118
 ```
 
-## 📝 Citation
+## 📖 Citation
 Please cite our repository if you use SEO in your work.
 ```bibtex
 ```
