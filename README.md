@@ -4,7 +4,7 @@
 ## ✒️ Overview
 SEO is a novel framework to integrate evolving events, detect emerging events, and automatically generate event synopsis for social networks in real time.
 <div align=center>
-<img src="https://github.com/lambdarw/SEO/blob/main/img/framework.png" width="45%" >
+<img src="https://github.com/lambdarw/SEO/blob/main/img/framework.png" width="52%" >
 </div>
 
 ## 👇 Dataset
