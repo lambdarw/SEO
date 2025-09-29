@@ -47,7 +47,7 @@ class KeywordAttentionModel(torch.nn.Module):
         self.embd = torch.nn.Linear(D_in, D_hidden)
         self.attention = torch.nn.Linear(D_hidden, 1)
         self.dropout = torch.nn.Dropout(dropout)
-        self.activation = torch.nn.ReLU()  # 可以根据需要调整
+        self.activation = torch.nn.ReLU()
 
     def forward(self, keywords, news_content, mask=None):
         # 使用多头注意力机制
@@ -180,17 +180,6 @@ def calculate_diversity(window):
 
     return gini
 
-    # 使用基尼不纯度（Gini Impurity）作为衡量标准。
-    # topics = window['discovered_story'].values
-    # topic_counts = Counter(topics)
-    # total = sum(topic_counts.values())
-    #
-    # proportions = [count / total for count in topic_counts.values()]
-    # proportions = np.array(proportions)
-    # proportions = proportions / np.sum(proportions)
-    # gini = 1 - np.sum(proportions ** 2)
-    # return gini
-
 
 def comp_window_size(window, df_org, window_end_date, threshold=0.75, move_step=1, max_size=3):
     """
@@ -256,24 +245,13 @@ if __name__ == '__main__':
     di = set()
     if args.LLM_mode == 'llama3.1-8b' or args.LLM_mode == 'llama3.2-3b':
         model_path = '/data/zhangruwen/premodel/llama3.1-8b'
-        # model = AutoModelForCausalLM.from_pretrained(
-        #     model_path,
-        #     torch_dtype=torch.float16,
-        #     device_map="auto",  # 自动分配多卡
-        # )
-        # tokenizer = AutoTokenizer.from_pretrained(model_path)
-        # pipe = pipeline(
-        #     "text-generation",
-        #     model=model,
-        #     tokenizer=tokenizer,
-        # )
         pipe = pipeline("text-generation", model=model_path,
             device=3, torch_dtype=torch.float16)
     elif args.LLM_mode == 'deepseek-qwen':
-        pipe = pipeline("text-generation", model='/data/zhangruwen/premodel/deepseek-r1-distill-qwen-7B',
+        pipe = pipeline("text-generation", model='deepseek-r1-distill-qwen-7B',
                         device=3, torch_dtype=torch.bfloat16)
     elif args.LLM_mode == 'deepseek-llama':
-        pipe = pipeline("text-generation", model='/data/zhangruwen/premodel/deepseek-r1-distill-llama-8B',
+        pipe = pipeline("text-generation", model='deepseek-r1-distill-llama-8B',
                         device=3, torch_dtype=torch.bfloat16)
     else:
         pipe = None
@@ -285,9 +263,9 @@ if __name__ == '__main__':
 
     # Load dataset and initial sentence representations/masks
     print("Loading Dataset....")
-    df_org = pd.read_json('/data/zhangruwen/Stroy/dataset/News14/News14_step2_summary_kw444.json')
-    masked_tensors = torch.load('/data/zhangruwen/Stroy/dataset/News14/News14_masked_embds_sample_summary.pt').cuda()
-    masks = torch.load('/data/zhangruwen/Stroy/dataset/News14/News14_masks_sample_summary.pt').cuda()
+    df_org = pd.read_json('./dataset/News14/News14_step2_summary.json')
+    masked_tensors = torch.load('./dataset/News14/News14_masked_embds_sample_summary.pt').cuda()
+    masks = torch.load('./dataset/News14/News14_masks_sample_summary.pt').cuda()
 
     '''
         Model initialize
@@ -448,7 +426,6 @@ if __name__ == '__main__':
             each_win_keywords_emb = torch.from_numpy(each_win_keywords_emb)
 
             for slide_i in range(len(slide)):
-                # print("slide_i:", slide.index[slide_i])
                 '''1. 求关键字与聚类中心的相似度'''
                 # 时间损失熵 * keywords
                 slide_i_time = df_org['date'][slide.index[slide_i]]
@@ -607,11 +584,6 @@ if __name__ == '__main__':
               np.round(np.mean(eval_times), 4),
               np.round(np.mean(train_times), 4))
 
-    # 写re_summary_dict
+    # 写summary_dict
     with open(args.llm_summary_dict, "w") as json_file:
         json.dump(re_summary_dict, json_file, indent=4)
-    # print("sim_list", sim_list)
-    # print("diff_list", diff_list)
-    # sim_dict = {"new": new_list, "old": old_list}
-    # with open("./visa/conf/llama_sim_dict.json", "w") as json_file:
-    #     json.dump(sim_dict, json_file, indent=4)
