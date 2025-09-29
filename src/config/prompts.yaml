@@ -1,0 +1,34 @@
+judgement:
+  user: |-
+      Please evaluate the relationship between the article and its summary following one of guidelines:
+      1.The key figures: Involve some of the same core characters.
+      2.The key setting: The event occurs in the same environment, or the article is a continuation of an event mentioned in the summary.
+      3.The field: The content is in the same field, such as sports, economy, environment.
+      If both the article’s core content and the summary align with one of above guidelines, respond with: "Yes, it is related." 
+      If both the article’s core content and the summary are not align with all above guidelines, respond with: "No, it is not related."
+      You MUST only respond using one of the following two options: ["Yes, it is related.", "No, it is not related."] 
+      DO NOT INCLUDE ANYTHING ELSE.
+      
+summary:
+  user: |-      
+      Please provide an objective summary of the given articles, ensuring there are no omissions or subjective interpretations. Follow these specific guidelines:
+      1.For the same event: Avoid using pronouns for entities, such as names and locations. Explicitly mention these entities where necessary.
+      2.For events of the same type: Summarize the patterns or developments of these events. Use pronouns for entities only when necessary.
+      3.Do not start the summary with phrases like "The article discusses," "The article emphasizes," or similar constructions that reference the article, author, or speaker.
+      If the text ends with an ellipsis, indicating it may be truncated, ignore it and proceed with the summary.
+      
+      For Example: 
+      Articles:['Rainstorm weather occurred in the United States on Monday, and the transportation department dispatched 100 people to maintain security.','It rained in China on Tuesday, and the West Lake in Hangzhou was misty and rainy. Pedestrians need to walk slowly.','It snowed in Russia on Tuesday, and the meteorological department stated that everyone needs to pay attention to safety.' ]   
+      Output:'Various countries are experiencing rainy and snowy weather, and various departments are taking effective measures to prevent it.' 
+      
+      Please adhere strictly to these instructions. Do not include any additional content.
+
+refresh_summary:
+  user: |-
+      You are provided with an article and an existing summary. Your task is to update the summary based on the article.
+      1.Focus on the key information in the article that is relevant to the original summary. Include important information such as key figures, events, and developments.
+      2.You can further enrich the summary with key details from the article or continue write the event's development.
+      3.Only include essential information that directly relate to the article’s main points and enhances the overall understanding of the summary.
+      Please follow the above rules. DO NOT INCLUDE ANYTHING ELSE.
+
+
