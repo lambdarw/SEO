@@ -50,4 +50,12 @@ pip install xformers==0.0.26.post1 vllm==0.5.1+cu118
 ## 📖 Citation
 Please cite our repository if you use SEO in your work.
 ```bibtex
+@article{zhang2025intelligent,
+  title={The Intelligent Social Event Observer: Multi-Source Continuous Event Integration, Discovery, and Induction with LLMs},
+  author={Zhang, Ruwen and Liu, Bo and Cao, Jinxin and Zhao, Hantao},
+  journal={Expert Systems with Applications},
+  pages={129093},
+  year={2025},
+  publisher={Elsevier}
+}
 ```
