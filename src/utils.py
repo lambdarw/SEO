@@ -19,7 +19,7 @@ from sentence_transformers import SentenceTransformer
 args = Args.args
 
 def get_llm_prompts(task_type, inputs):
-    with open("/data/zhangruwen/Story2/config/prompts.yaml", 'r', encoding='utf-8') as file:
+    with open("./config/prompts.yaml", 'r', encoding='utf-8') as file:
         prompts = yaml.load(file, yaml.FullLoader)
 
     if task_type == 'summary':  # 生成新闻组的摘要
@@ -235,6 +235,7 @@ def adjust_learning_rate(optimizer, epoch, num_epochs, start_lr=0.001, min_lr=0.
         param_group["lr"] = lr
 
     return lr
+
 
 
 
