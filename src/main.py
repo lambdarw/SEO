@@ -127,34 +127,6 @@ def indices_uniform_sampling(N, story_dict, cluster_confs, min_cluster_size=1):
     res += res[: (N - len(res))]  # 循环补齐
     return res, False, choice_number
 
-def aug_samples(window, story_dict, choice_number):
-    aug_tensors = []
-    aug_masks = []
-    aug_class_indices = []
-
-    for story_index, sample_num in choice_number.items():
-        sample_indexs = np.random.choice(story_dict[story_index], sample_num, replace=True)
-        for sample_index in sample_indexs:
-            # 1. 通过 LLM 生成新的增强句子
-            refer_article = window.loc[sample_index, 'summary']
-            prompts = get_llm_prompts('samples_generate', refer_article)
-            llm_generated_article = get_llm_output(prompts)
-            # llm_generated_article = "afdsafa sdfasdf"
-            # 2. 生成新的张量, 进行掩码
-            new_tensor = embedding(llm_generated_article)
-            new_tensor = torch.tensor(new_tensor)
-            new_tensor = new_tensor.unsqueeze(0).expand(1, -1).cuda()
-            new_mask = masking(new_tensor)
-            # 4. 记录增强样本
-            aug_tensors.append(new_tensor)
-            aug_masks.append(new_mask)
-            aug_class_indices.append(story_index)
-
-    aug_tensors = torch.stack(aug_tensors)
-    aug_masks = torch.stack(aug_masks)
-
-    return aug_tensors, aug_masks, aug_class_indices
-
 
 def calculate_diversity(window):
     """
@@ -524,14 +496,6 @@ if __name__ == '__main__':
                     sample_outputs = model(sample_keywords_embds, masked_tensors[samples], masks[samples])[0].squeeze(1)
 
                     class_indices = [existing_tuned_centers.index(c) for c in window.loc[samples, 'discovered_story']]
-
-                    if args.aug_flag and len_flag:
-                        aug_tensors, aug_masks, aug_class_indices = aug_samples(window, story_dict, choice_number)
-                        aug_tensors, aug_masks = aug_tensors.cuda(), aug_masks.cuda()
-                        aug_keywords_embds = keywords_embds.unsqueeze(0).repeat(aug_tensors.shape[0], 1, 1).cuda()
-                        aug_sample_outputs = model(aug_keywords_embds, aug_tensors, aug_masks)[0].squeeze(1)
-                        sample_outputs = torch.concat((sample_outputs, aug_sample_outputs))
-                        class_indices = class_indices + aug_class_indices
 
                     loss = infonce_loss(sample_outputs, class_indices, class_embds, args.temp)
 
