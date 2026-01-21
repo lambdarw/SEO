@@ -20,6 +20,7 @@ def reprocess_json():
 
 
 if __name__ == "__main__":
-    DATASET_NAME = 'WCEP18'  # News14  WCEP18  WCEP19
+    DATASET_NAME = ''  # News14  WCEP19
 
     reprocess_json()
+
