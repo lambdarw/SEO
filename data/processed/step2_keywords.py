@@ -40,7 +40,7 @@ def extract_keywords_kbert(doc):
 
 
 if __name__ == "__main__":
-    DATASET_NAME = 'WCEP18'  # News14  WCEP18  WCEP19
+    DATASET_NAME = ''  # News14  WCEP19
     nlp = spacy.load("en_core_web_lg")
     article_df = pd.read_json(DATASET_NAME+"/"+DATASET_NAME + "_step1_summary.json")
 
@@ -67,3 +67,4 @@ if __name__ == "__main__":
     torch.save(masked_tensors, DATASET_NAME + "/" + DATASET_NAME + "_masked_embds_sample_summary.pt")
 
     torch.save(masks, DATASET_NAME + "/" + DATASET_NAME + "_masks_sample_summary.pt")
+
