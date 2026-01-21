@@ -30,7 +30,7 @@ def df_sample(df, random_percentage=0.02):
 if __name__ == "__main__":
     sample_flag = True
     summary_flag = True
-    DATASET_NAME = 'WCEP19'  # News14  WCEP18  WCEP19
+    DATASET_NAME = ''  # News14  WCEP19
     article_df = pd.read_json(DATASET_NAME+"/"+DATASET_NAME + "_raw.json")
 
     '''0.抽取一部分数据测试'''
@@ -83,3 +83,4 @@ if __name__ == "__main__":
 
     article_df[['id', 'date', 'title', 'sentence_counts', 'summary', 'query']].to_json(
         DATASET_NAME + "/" + DATASET_NAME + "_step1_summary.json")  # remove 'story' or 'query' if not available
+
