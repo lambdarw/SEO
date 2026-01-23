@@ -39,7 +39,7 @@ python main.py
 ```
 
 ## ⏰ Optimized Inference with vLLM
-To maximize inference efficiency, we recommend leveraging the [vLLM](https://docs.vllm.ai/en/latest/) framework for batched and cached inference. 
+To maximize inference efficiency, we recommend leveraging the [vLLM](https://docs.vllm.ai/en/latest/) framework for batched and cached inference, with a associated performance overhead.
 
 Installation Instructions, requiring CUDA 11.8+:
 ```yaml
